@@ -1,5 +1,7 @@
+var util = require('./util.js')
+
 module.exports = {
-  port:9008,
+  port:util.getConf(),
   host:'127.0.0.1',
   config:{
     hot:true

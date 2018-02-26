@@ -6,15 +6,14 @@ var fs = require('fs')
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const cwd = process.cwd()
 
-module.exports = {
+var config = {
   devtool: 'inline-source-map',
   entry:{
     index:[
       require.resolve('webpack-dev-server/client') + '?/',
       require.resolve('webpack/hot/dev-server'),
       path.resolve(cwd,'src','index.js')
-    ],
-    lib:['react','react-dom']
+    ]
   },
   output:{
     path:path.resolve(cwd,'dist'),
@@ -55,9 +54,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-       names: ['lib', 'manifest']
-    }),
     new ExtractTextPlugin("[name]-[hash:8].css"),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -68,3 +64,16 @@ module.exports = {
     })
   ]
 }
+
+// 检查项目中是否定义了lib
+var lib = require('./util.js').getLib()
+if(lib){
+  config.entry.lib = lib
+  config.plugins.push(
+    new webpack.optimize.CommonsChunkPlugin({
+       names: ['lib', 'manifest']
+    })
+  )
+}
+
+module.exports = config
