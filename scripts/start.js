@@ -3,11 +3,19 @@
 var webpack = require('webpack')
 var WebpackDevServer = require('webpack-dev-server')
 var path = require('path')
-var cwd = process.cwd()
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var fs = require('fs')
+
+const cwd = process.cwd()
 
 var webpackConfig = {
+  devtool: 'inline-source-map',
   entry:{
-    index:path.resolve(cwd,'src','index.js')
+    index:[
+      require.resolve('webpack-dev-server/client') + '?/',
+      require.resolve('webpack/hot/dev-server'),
+      path.resolve(cwd,'src','index.js')
+    ]
   },
   output:{
     path:path.resolve(cwd,'dist'),
@@ -38,15 +46,22 @@ var webpackConfig = {
         exclude:/node_modules/,
         use:require.resolve('json-loader')
       }, {
-       test: /\.(png|svg|jpg|gif)$/,
-       exclude:/node_modules/,
-       use: require.resolve('file-loader')
+        test: /\.(png|svg|jpg|gif)$/,
+        exclude:/node_modules/,
+        use: require.resolve('file-loader')
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      title:'tool',
+      template:path.resolve(fs.realpathSync(cwd),'public','index.html'),
+      inject:'body'
+    })
+  ]
 }
-
-
 
 var compiler = webpack(webpackConfig,(err,status)=>{
   //console.log(err)
@@ -55,6 +70,6 @@ var compiler = webpack(webpackConfig,(err,status)=>{
 var devServer = new WebpackDevServer(compiler,{
   hot:true
 })
-devServer.listen(9008,'0.0.0.0',err=>{
-  console.log(err)
+devServer.listen(9008,'127.0.0.1',err=>{
+  //console.log(err)
 })
