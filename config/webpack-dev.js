@@ -10,8 +10,10 @@ var config = {
   devtool: 'inline-source-map',
   entry:{
     index:[
+      // hot-replace
       require.resolve('webpack-dev-server/client') + '?/',
       require.resolve('webpack/hot/dev-server'),
+      // 入口文件
       path.resolve(cwd,'src','index.js')
     ]
   },
