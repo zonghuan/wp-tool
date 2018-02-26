@@ -1,8 +1,10 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path')
-const cwd = process.cwd()
 var webpack = require('webpack')
 var fs = require('fs')
+
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const cwd = process.cwd()
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -36,7 +38,10 @@ module.exports = {
         ]
       },{
         test:/\.css$/,
-        use:require.resolve('css-loader')
+        use:ExtractTextPlugin.extract({
+          fallback:require.resolve('style-loader'),
+          use:require.resolve('css-loader')
+        })
       },{
         test:/\.json$/,
         exclude:/node_modules/,
@@ -49,6 +54,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new ExtractTextPlugin("[name]-[hash:8].css"),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
