@@ -10,22 +10,26 @@ var config = {
   devtool: 'inline-source-map',
   entry:{
     index:[
-      // hot-replace
-      require.resolve('webpack-dev-server/client') + '?/',
-      require.resolve('webpack/hot/dev-server'),
       // 入口文件
       path.resolve(cwd,'src','index.js')
     ]
   },
   output:{
     path:path.resolve(cwd,'dist'),
-    filename:'[name]-[hash:8].js'
+    filename:'[name]-[chunkhash:8].js'
   },
   module:require('../loaders/spa-loader.js'),
   plugins: [
-    new ExtractTextPlugin("[name]-[hash:8].css"),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin("[name]-[contenthash:8].css"),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+          warnings: false
+      },
+      output: {
+        comments: false,  // remove all comments
+      },
+      //exclude:[/^react$/,/ant/]
+    }),
     new HtmlWebpackPlugin({
       title:'tool',
       template:path.resolve(fs.realpathSync(cwd),'public','index.html'),
