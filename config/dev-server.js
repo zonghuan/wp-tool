@@ -4,6 +4,7 @@ module.exports = {
   port:util.getConf().port,
   host:'127.0.0.1',
   config:{
-    hot:true
+    hot:true,
+    allowedHosts:['*']
   }
 }
