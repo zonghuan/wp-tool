@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 
 var webpack = require('webpack')
 var path = require('path')
