@@ -7,10 +7,15 @@ module.exports = {
   getConf(){
     // 默认配置
     var defaultConf = {
-      port : 9008
+      port : 9008,
+      template : path.resolve(__dirname,'../','public','index.html')
     }
     try{
       var conf = require(path.resolve(cwd,'package.json')).config||{}
+      // 补全template的路径
+      if(conf.template){
+        conf.template = path.resolve(cwd,conf.template)
+      }
       return Object.assign(defaultConf,conf)
     }catch(e){
 

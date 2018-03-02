@@ -2,6 +2,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path')
 var webpack = require('webpack')
 var fs = require('fs')
+var util = require('./util.js')
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const cwd = process.cwd()
@@ -32,7 +33,7 @@ var config = {
     }),
     new HtmlWebpackPlugin({
       title:'tool',
-      template:path.resolve(fs.realpathSync(cwd),'public','index.html'),
+      template:util.getConf().template,
       inject:'body'
     })
   ]
