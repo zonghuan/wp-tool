@@ -1,26 +1,22 @@
-// 单页线上webpack配置
+// 多页线上webpack配置
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path')
 var webpack = require('webpack')
 var fs = require('fs')
 var util = require('./util.js')
+var {entry,htmlConfig} = require('./entry.js')
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const cwd = process.cwd()
 
 var config = {
-  entry:{
-    index:[
-      // 入口文件
-      path.resolve(cwd,'src','index.js')
-    ]
-  },
+  entry,
   output:{
     path:path.resolve(cwd,'dist'),
     filename:'[name]-[chunkhash:8].js'
   },
-  module:require('../loaders/spa-loader.js'),
+  module:require('../loaders/multi-loader.js'),
   plugins: [
     new ExtractTextPlugin("[name]-[contenthash:8].css"),
     new webpack.optimize.UglifyJsPlugin({
@@ -31,22 +27,17 @@ var config = {
         comments: false,  // remove all comments
       },
       //exclude:[/^react$/,/ant/]
-    }),
-    new HtmlWebpackPlugin({
-      title:'tool',
-      template:util.getConf().template,
-      inject:'body'
     })
-  ]
+  ].concat(htmlConfig||[])
 }
 
 // 检查项目中是否定义了lib
 var lib = require('./util.js').getLib()
 if(lib){
-  config.entry.lib = lib
+  config.entry.zzzlib = lib
   config.plugins.push(
     new webpack.optimize.CommonsChunkPlugin({
-       names: ['lib', 'manifest']
+       names: ['zzzlib', 'manifest']
     })
   )
 }

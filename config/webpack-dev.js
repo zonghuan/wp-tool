@@ -1,3 +1,5 @@
+// 单页测试webpack配置
+
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path')
 var webpack = require('webpack')
