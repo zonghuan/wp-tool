@@ -17,6 +17,11 @@ var config = {
     filename:'[name]-[chunkhash:8].js'
   },
   module:require('../loaders/multi-loader.js'),
+  resolve:{
+    "alias":{
+      "widget":path.resolve(cwd,'./src/widget')
+    }
+  },
   plugins: [
     new ExtractTextPlugin("[name]-[contenthash:8].css"),
     new webpack.optimize.UglifyJsPlugin({
@@ -27,6 +32,11 @@ var config = {
         comments: false,  // remove all comments
       },
       //exclude:[/^react$/,/ant/]
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
     })
   ].concat(htmlConfig||[])
 }

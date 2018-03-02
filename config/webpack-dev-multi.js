@@ -29,10 +29,20 @@ var config = {
     filename:'[name]-[hash:8].js'
   },
   module:require('../loaders/multi-loader.js'),
+  resolve:{
+    "alias":{
+      "widget":path.resolve(cwd,'./src/widget')
+    }
+  },
   plugins: [
     new ExtractTextPlugin("[name]-[hash:8].css"),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("development")
+      }
+    })
   ].concat(htmlConfig)
 }
 

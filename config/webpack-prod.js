@@ -36,6 +36,11 @@ var config = {
       title:'tool',
       template:util.getConf().template,
       inject:'body'
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
     })
   ]
 }

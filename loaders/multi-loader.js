@@ -27,15 +27,17 @@ module.exports = {
       test: /\.less$/,
       use: ExtractTextPlugin.extract({
         use: [{
-            loader: "css-loader"
+            loader: require.resolve("css-loader")
         }, {
-            loader: "less-loader",
+            loader: require.resolve("less-loader"),
             options:{
-              globalVars:750/10+"rem"
+              globalVars:{
+                base:750/10+"rem"
+              }
             }
         }],
         // use style-loader in development
-        fallback: "style-loader"
+        fallback: require.resolve("style-loader")
       })
     },{
       test:/\.json$/,
