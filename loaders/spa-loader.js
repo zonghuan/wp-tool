@@ -31,6 +31,14 @@ module.exports = {
       test: /\.(png|svg|jpg|gif)$/,
       exclude:/node_modules/,
       use: require.resolve('file-loader')
+    },{
+      test: /\.html$/,
+      use: {
+        loader: require.resolve('html-loader'),
+        options: {
+          attrs: [':data-src']
+        }
+      }
     }
   ]
 }
