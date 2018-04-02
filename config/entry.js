@@ -18,13 +18,12 @@ for(var i=0;i<folders.length;i++){
   entry[folders[i]]=[require.resolve(path.join(pageDir,folders[i]))]
   htmlConfig.push(
     new HtmlWebpackPlugin({
-      chunks: ['manifest','zzlib',folders[i]],
+      chunks: ['manifest','zzzlib',folders[i]],
       template:'./webpack/common/template.html',
       filename:`${folders[i]}.html`
     })
   )
 }
-
 
 module.exports={
   entry,
