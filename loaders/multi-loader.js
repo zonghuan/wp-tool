@@ -44,7 +44,7 @@ module.exports = {
       exclude:/node_modules/,
       use:require.resolve('json-loader')
     }, {
-      test: /\.(png|svg|jpg|gif|jpeg)$/,
+      test: /\.(png|svg|jpg|gif|jpeg|swf)$/,
       exclude:/node_modules/,
       use: require.resolve('file-loader')
     }
