@@ -6,6 +6,7 @@ var pageDir=path.join(cwd,'./src/page')
 var folders=fs.readdirSync(pageDir)
 var entry={}
 var htmlConfig=[]
+var util = require('./util.js')
 
 
 // 需要忽略的页面，比如一些已经下线的页面,还有.DS_Store
@@ -19,7 +20,7 @@ for(var i=0;i<folders.length;i++){
   htmlConfig.push(
     new HtmlWebpackPlugin({
       chunks: ['manifest','zzzlib',folders[i]],
-      template:'./webpack/common/template.html',
+      template:util.getConf().template,
       filename:`${folders[i]}.html`
     })
   )
