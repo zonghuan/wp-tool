@@ -21,7 +21,7 @@ var config = {
     filename:'[name].js'
   },outConfig.output||{}),
 
-  module:require('../loaders/package-loader.js'),
+  module:require('../loaders/multi-loader.js'),
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {

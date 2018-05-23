@@ -1,6 +1,6 @@
 {
   "name": "wp-build",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "main": "index.js",
   "bin": "index.js",
@@ -14,6 +14,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "chalk": "^2.3.1",
@@ -29,8 +30,8 @@
     "less-loader": "^4.0.6",
     "style-loader": "^0.20.2",
     "webpack": "3.8.1",
-    "webpack-plugin-manifest": "^1.1.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-dev-server": "^2.11.1",
+    "webpack-plugin-manifest": "^1.1.0"
   },
   "_from": "wp-build@1.1.10",
   "_resolved": "http://registry.npm.taobao.org/wp-build/download/wp-build-1.1.10.tgz"
