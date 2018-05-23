@@ -1,6 +1,6 @@
 {
   "name": "wp-build",
-  "version": "1.1.10",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "bin": "index.js",
@@ -31,5 +31,7 @@
     "webpack": "3.8.1",
     "webpack-plugin-manifest": "^1.1.0",
     "webpack-dev-server": "^2.11.1"
-  }
+  },
+  "_from": "wp-build@1.1.10",
+  "_resolved": "http://registry.npm.taobao.org/wp-build/download/wp-build-1.1.10.tgz"
 }
