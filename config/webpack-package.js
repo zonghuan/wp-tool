@@ -21,6 +21,15 @@ var config = {
     filename:'[name].js'
   },outConfig.output||{}),
 
+  externals: {
+    "three": {
+        commonjs: "three",
+        commonjs2: "three",
+        amd: "three",
+        root: "THREE"
+    }
+  },
+
   module:require('../loaders/multi-loader.js'),
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
