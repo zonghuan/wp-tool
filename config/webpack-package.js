@@ -27,6 +27,12 @@ var config = {
         commonjs2: "three",
         amd: "three",
         root: "THREE"
+    },
+    "react": {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "react",
+      root: "REACT"
     }
   },
 
